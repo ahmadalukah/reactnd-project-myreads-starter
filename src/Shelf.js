@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import sortBy from 'sort-by'
 
 class Shelf extends Component {
+
     static PropTypes = {
         shelf: PropTypes.string.isRequired,
         books: PropTypes.array.isRequired,
@@ -42,7 +43,7 @@ class Shelf extends Component {
                                     </div>
                                 </div>
                                 <div className="book-title">{book.title}</div>
-                                <div className="book-authors">{book.authors[0]}</div>
+                                <div className="book-authors">{book.authors? book.authors.map((author)=> author) : ''}</div>
                             </li>
                         ))}
 

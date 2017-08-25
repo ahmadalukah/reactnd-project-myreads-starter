@@ -12,7 +12,6 @@ class BooksApp extends React.Component {
     componentDidMount() {
         BooksAPI.getAll().then((books) => {
             this.setState({books})
-            console.log(books)
         })
     }
   render() {
@@ -24,8 +23,7 @@ class BooksApp extends React.Component {
           <Route
               path="/search"
               render={() => (
-                  <SearchBooks
-                  />
+                  <SearchBooks/>
               )}
           />
       </div>
