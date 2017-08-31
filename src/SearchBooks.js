@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import * as BooksAPI from './BooksAPI'
 import {Link} from 'react-router-dom'
+import BookStatus from './BookStatus'
 
 class SearchBooks extends Component {
 
@@ -13,11 +14,13 @@ class SearchBooks extends Component {
         BooksAPI.search(query, 20).then((books) => {
             books=(books.error ? ([]) : (books))
             this.setState({books: books})
+            console.log(books)
         })
     }
 
     updateQuery=(query) => {
         this.setState({query: query.trim()})
+        this.search(query)
     }
 
 
@@ -27,7 +30,7 @@ class SearchBooks extends Component {
         var booksList
 
         if (query.length > 1) {
-            this.search(query)
+
             booksList=books.map((book) => (
                 <li key={book.id}>
                     <div className="book">
@@ -37,15 +40,7 @@ class SearchBooks extends Component {
                                 height: 193,
                                 backgroundImage: `url(${book.imageLinks.smallThumbnail ? book.imageLinks.smallThumbnail : ''})`
                             }}></div>
-                            <div className="book-shelf-changer">
-                                <select>
-                                    <option value="none" disabled>Move to...</option>
-                                    <option value="currentlyReading">Currently Reading</option>
-                                    <option value="wantToRead">Want to Read</option>
-                                    <option value="read">Read</option>
-                                    <option value="none">None</option>
-                                </select>
-                            </div>
+                            <BookStatus book={book} bookState={book.shelf} />
                         </div>
                     </div>
                     <div className="book-title">{book.title}</div>
@@ -77,33 +72,6 @@ class SearchBooks extends Component {
                         {booksList}
                     </ol>
                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             </div>
         )
     }

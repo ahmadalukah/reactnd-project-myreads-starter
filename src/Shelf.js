@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import sortBy from 'sort-by'
+import BookStatus from './BookStatus'
 
 class Shelf extends Component {
 
@@ -31,15 +32,7 @@ class Shelf extends Component {
                                             height: 193,
                                             backgroundImage: `url(${book.imageLinks.smallThumbnail})`
                                         }}></div>
-                                        <div className="book-shelf-changer">
-                                            <select>
-                                                <option value="none" disabled>Move to...</option>
-                                                <option value="currentlyReading">Currently Reading</option>
-                                                <option value="wantToRead">Want to Read</option>
-                                                <option value="read">Read</option>
-                                                <option value="none">None</option>
-                                            </select>
-                                        </div>
+                                        <BookStatus books={books} book={book}/>
                                     </div>
                                 </div>
                                 <div className="book-title">{book.title}</div>
