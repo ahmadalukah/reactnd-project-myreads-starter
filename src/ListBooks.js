@@ -5,13 +5,14 @@ import Shelf from './Shelf'
 
 class ListBooks extends Component {
 
-    static PropTypes = {
+    static propTypes = {
         books: PropTypes.array.isRequired,
+        updateBookShelf: PropTypes.func.isRequired
     }
 
     render() {
 
-        const {books} = this.props
+        const {books,updateBookShelf} = this.props
 
         return (
             <div className="list-books">
@@ -24,16 +25,19 @@ class ListBooks extends Component {
                             shelf="currentlyReading"
                             books={books}
                             title="Currently Reading"
+                            updateBookShelf={updateBookShelf}
                         />
                         <Shelf
                             shelf="wantToRead"
                             books={books}
                             title="Want to Read"
+                            updateBookShelf={updateBookShelf}
                         />
                         <Shelf
                             shelf="read"
                             books={books}
                             title="Read"
+                            updateBookShelf={updateBookShelf}
                         />
                     </div>
                 </div>

@@ -5,15 +5,16 @@ import BookStatus from './BookStatus'
 
 class Shelf extends Component {
 
-    static PropTypes = {
+    static propTypes = {
         shelf: PropTypes.string.isRequired,
         books: PropTypes.array.isRequired,
-        title: PropTypes.string.isRequired
+        title: PropTypes.string.isRequired,
+        updateBookShelf: PropTypes.func.isRequired
     }
 
     render() {
 
-        const {title, books, shelf} = this.props
+        const {title, books, shelf,updateBookShelf} = this.props
         let currentShelf
         currentShelf = books.filter((book) => book.shelf === shelf)
         currentShelf.sort(sortBy('title'))
@@ -30,9 +31,9 @@ class Shelf extends Component {
                                         <div className="book-cover" style={{
                                             width: 128,
                                             height: 193,
-                                            backgroundImage: `url(${book.imageLinks.smallThumbnail})`
+                                            backgroundImage: `url(${book.imageLinks.smallThumbnail ? book.imageLinks.smallThumbnail : ''})`
                                         }}></div>
-                                        <BookStatus books={books} book={book}/>
+                                        <BookStatus onChangeShelf={updateBookShelf} book={book}/>
                                     </div>
                                 </div>
                                 <div className="book-title">{book.title}</div>

@@ -1,21 +1,40 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import * as BooksAPI from './BooksAPI'
 import {Link} from 'react-router-dom'
 import BookStatus from './BookStatus'
 
 class SearchBooks extends Component {
 
-    state={
-        books : [],
-        query: '',
+    static propTypes = {
+        updateBookShelf: PropTypes.func.isRequired,
+        OwnedBooks: PropTypes.array.isRequired,
+
     }
 
+    state={
+        books : [],
+        query: ''
+    }
+    // this function searches for books and see if there are similar books from both the result and the owned books
     search=(query) => {
         BooksAPI.search(query, 20).then((books) => {
+
             books=(books.error ? ([]) : (books))
+            books.map((book) => {
+                const OwnedBooks = this.props.OwnedBooks
+                // Finding the books with same ID from both, the search results and the owned book list
+                const myBooks = OwnedBooks.find(ownedBooks => ownedBooks.id === book.id)
+                if (myBooks) {
+                    book.shelf = myBooks.shelf
+                } else {
+                    book.shelf = 'none'
+                }
+            })
+
             this.setState({books: books})
-            console.log(books)
-        })
+        }
+    )
     }
 
     updateQuery=(query) => {
@@ -23,39 +42,14 @@ class SearchBooks extends Component {
         this.search(query)
     }
 
-
     render() {
 
-        const {query,books}=this.state
-        var booksList
-
-        if (query.length > 1) {
-
-            booksList=books.map((book) => (
-                <li key={book.id}>
-                    <div className="book">
-                        <div className="book-top">
-                            <div className="book-cover" style={{
-                                width: 128,
-                                height: 193,
-                                backgroundImage: `url(${book.imageLinks.smallThumbnail ? book.imageLinks.smallThumbnail : ''})`
-                            }}></div>
-                            <BookStatus book={book} bookState={book.shelf} />
-                        </div>
-                    </div>
-                    <div className="book-title">{book.title}</div>
-                    <div className="book-authors">{book.authors? book.authors.map((author)=> author) : ''}</div>
-                </li>
-            ))
-        }
-        else {
-            booksList=''
-        }
-
+        const {updateBookShelf} = this.props
+        const {query}=this.state
         return (
             <div className="search-books">
                 <div className="search-books-bar">
-                    <Link className="close-search" to="/">Close</Link>
+                    <Link className="close-search" to="/" >Close</Link>
                     <div className="search-books-input-wrapper">
 
                         <input
@@ -69,7 +63,24 @@ class SearchBooks extends Component {
                 </div>
                 <div className="search-books-results">
                     <ol className="books-grid">
-                        {booksList}
+                        {
+                            this.state.books.map((book) => (
+                                <li key={book.id}>
+                                    <div className="book">
+                                        <div className="book-top">
+                                            <div className="book-cover" style={{
+                                                width: 128,
+                                                height: 193,
+                                                backgroundImage: `url(${book.imageLinks.smallThumbnail ? book.imageLinks.smallThumbnail : ''})`
+                                            }}></div>
+                                            <BookStatus onChangeShelf={updateBookShelf} book={book}/>
+                                        </div>
+                                    </div>
+                                    <div className="book-title">{book.title}</div>
+                                    <div className="book-authors">{book.authors? book.authors.map((author)=> author) : ''}</div>
+                                </li>
+                            ))
+                        }
                     </ol>
                 </div>
             </div>
