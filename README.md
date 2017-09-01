@@ -1,64 +1,39 @@
-This is the starter template for the final assessment project for Udacity's React Fundamentals course, developed by [React Training](https://reacttraining.com). The goal of this template is to save you time by providing a static example of the CSS and HTML markup that may be used, but without any of the React code that is needed to complete the project. If you choose to start with this template, your job will be to add interactivity to the app by refactoring the static code in this template.
+# MyReads React App
+_A Book Lending App_
 
-Of course, you are free to start this project from scratch if you wish! Just be sure to use [Create React App](https://github.com/facebookincubator/create-react-app) to bootstrap the project.
+This is a project for [React Nano Degree](https://www.udacity.com/course/react-nanodegree--nd019) from Udacity which lets you organize your books in shelves.
 
-## What You're Getting
+## Installation
+To install this app, **first** you have to install the required packages, to do that write this command:
 ```
-+--public/    
- |-- index.html - DO NOT MODIFY
- |-- favicon.ico - React Icon, You may change if you wish.
-+-- src/
- +-- icons/ - Helpful images for your app. Use at your discretion.
-  |-- add.svg
-  |-- arrow-back.svg
-  |-- arrow-drop-down.svg
- |-- App.js - This is the root of your app. Contains static HTML right now.
- |-- App.css - Styles for your app. Feel free to customize this as you desire.
- |-- App.test.js - Used for testing. Provided with Create React App. 
- Testing is encouraged, but not required.
- |-- BooksAPI.js - A JavaScript API for the provided Udacity backend. 
- Instructions for the methods are below.
- |-- index.js - You should not need to modify this file. It is used for DOM rendering only.
- |-- index.css - Global styles. You probably won't need to change anything here.
-|-- .gitignore 
-|-- CONTRIBUTING.MD - Information about contributing to this repo. 
-TL;DR - Fork and clone your own version of this to use it.
-|-- README.MD - This README file.
-|-- SEARCH_TERMS.md - The whitelisted short collection of available search terms 
-for you to use with your app.
-|-- package.json - npm package manager file. It's unlikely that you'll need to modify this.
+npm install
+```
+After that, you can run your app by writing this command:
+```
+npm start
 ```
 
-Remember that good React design practice is to create new JS files for each component and use import/require statements to include them where they are needed.
+## Usage
+### Home page:
+This app basically let you organize your books between three shelves:
+1. Currently reading
+2. Want to read
+3. Read
 
-## Backend Server
+The homepage contains all your books.
 
-To simplify your development process, we've provided a backend server for you to develop against. The provided file [`BooksAPI.js`](src/BooksAPI.js) contains the methods you will need to perform necessary operations on the backend:
+To change the state of a book, you can simply click on the arrow icon in the corner bottom of any book and choose the new state
 
-### `getAll()`
-* Returns a Promise which resolves to a JSON object containing a collection of book objects.
-* This collection represents the books currently in the bookshelves in your app.
+### Adding a new book:
+To add a new book, click on the plus icon in the right bottom corner, you will go to the search page.
 
-### `update(book, shelf)`
-* book: `<Object>` containing at minimum an `id` attribute
-* shelf: `<String>` contains one of ["wantToRead", "currentlyReading", "read"]  
-* Returns a Promise which resolves to a JSON object containing the response data of the POST request
+Here you can find new books and putting them in your collection, to do that just type a word in the search box and you will find all the results. you can change the state of any book just like you did in the home page.
 
-### `search(query, maxResults)`
-* query: `<String>`
-* maxResults: `<Integer>` Due to the nature of the backend server, search results are capped at 20, even if this is set higher.
-* Returns a Promise which resolves to a JSON object containing a collection of book objects.
-* These books do not know which shelf they are on. They are raw results only. You'll need to make sure that books have the correct state while on the search page.
+**It is important to know** that the search results are fixed and limited to a particular set of search terms, you can find a list of those search terms in [SEARCH_TERMS.md](SEARCH_TERMS.md) .
 
-## Important
-The backend API uses a fixed set of cached search results and is limited to a particular set of search terms, which can be found in [SEARCH_TERMS.md](SEARCH_TERMS.md). That list of terms are the _only_ terms that will work with the backend, so don't be surprised if your searches for Basket Weaving or Bubble Wrap don't come back with any results. 
-
-## create-react-app
-
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). You can find more information on how to perform common tasks [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
 ## Contributing
+This repository is a fork from [reactnd-project-myreads-starter](https://github.com/udacity/reactnd-project-myreads-starter) for the first project purpose from [react nano degree](https://www.udacity.com/course/react-nanodegree--nd019). I can't accept any contributions for this app. 
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+## licensing
+This is an applic project for [react nano degree](https://www.udacity.com/course/react-nanodegree--nd019) , you can find it useful to understand this project and the flow of this app. Don't present this project as your own, just learn from it if you want and make something amazing!ation

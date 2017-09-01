@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import sortBy from 'sort-by'
-import BookStatus from './BookStatus'
+import Book from './Book'
 
 class Shelf extends Component {
 
@@ -25,22 +25,8 @@ class Shelf extends Component {
                 <div className="bookshelf-books">
                     <ol className="books-grid">
                         {currentShelf.map((book) => (
-                            <li key={book.id}>
-                                <div className="book">
-                                    <div className="book-top">
-                                        <div className="book-cover" style={{
-                                            width: 128,
-                                            height: 193,
-                                            backgroundImage: `url(${book.imageLinks.smallThumbnail ? book.imageLinks.smallThumbnail : ''})`
-                                        }}></div>
-                                        <BookStatus onChangeShelf={updateBookShelf} book={book}/>
-                                    </div>
-                                </div>
-                                <div className="book-title">{book.title}</div>
-                                <div className="book-authors">{book.authors? book.authors.map((author)=> author) : ''}</div>
-                            </li>
+                            <Book key={book.id} book={book} updateBookShelf={updateBookShelf}/>
                         ))}
-
                     </ol>
                 </div>
             </div>
